@@ -15,11 +15,11 @@ class account
 	int ac_no;      //account number
 	char name[20];  //name of account holder
 	int balance;    //account balance (in Rs)
-    int min_bal;    //min balance limit
-    int max_bal;    //max balance limit
-    char m_no[20];  //mobile number
-    char pass[20];  //account password
-    tm ac_dt;       //account creation date and time
+    	int min_bal;    //min balance limit
+    	int max_bal;    //max balance limit
+    	char m_no[20];  //mobile number
+    	char pass[20];  //account password
+    	tm ac_dt;       //account creation date and time
 public:
 	void create_account();	    //function to get data from user
 	void show_account(bool, bool) const;	//function to show data on screen
@@ -27,13 +27,13 @@ public:
 	void deposite(int);	        //function to accept amount and add to balance amount
 	void withdraw(int);	        //function to accept amount and subtract from balance amount
 	void show() const;	        //function to show data in tabular format
-    void show_name() const;     //function to show name of account holder
+    	void show_name() const;     //function to show name of account holder
 	int get_ac_no() const;	    //function to return account number
 	int get_balance() const;	//function to return balance amount
-    int get_min_bal() const;    //function to return min balance limit
-    int get_max_bal() const;    //function to return max balance limit
-    void set_balance(int);      //function to modify balance amount
-    bool authenticate(char []); //function to match password
+    	int get_min_bal() const;    //function to return min balance limit
+    	int get_max_bal() const;    //function to return max balance limit
+    	void set_balance(int);      //function to modify balance amount
+    	bool authenticate(char []); //function to match password
 };
 
 //STRUCTURE FOR TRANSACTION
@@ -61,24 +61,30 @@ int get_acno(string);
 
 //ACCOUNT FUNCTIONS DEFINATION
 bool check_acno(string s){
-    for(int i=0; i<s.length(); i++){
-        if(s[i] < '0' || s[i] > '9') return false;
+    for(int i=0; i<s.length(); i++)
+    {
+        if(s[i] < '0' || s[i] > '9')
+	return false;
     }
     return true;
 }
 
-void account::create_account(){
+void account::create_account()
+{
     string temp_acno;
     do{
         cout<<"Enter Account Number : ";
 	    cin>>temp_acno;
-        if(temp_acno.size() != 6 || !check_acno(temp_acno) || (get_acno(temp_acno) < 100000)){
+        if(temp_acno.size() != 6 || !check_acno(temp_acno) || (get_acno(temp_acno) < 100000))
+	{
             cout<<"<--Enter 6-digit Valid Account Number-->\n\n";
         }
-        else if(ac_exists(get_acno(temp_acno)) != -1){ 
+        else if(ac_exists(get_acno(temp_acno)) != -1)
+	{ 
             cout<<"<--Account Number Already Exists-->\n\n";
         }
-        else{
+        else
+	{
             break;
         }
         
@@ -92,13 +98,16 @@ void account::create_account(){
 
         int i=0;
         while(i<20 && name[i] != '\0'){
-            if(!((name[i]>='a'&&name[i]<='z') || (name[i]>='A'&&name[i]<='Z') || (name[i]==' '))){
+            if(!((name[i]>='a'&&name[i]<='z') || (name[i]>='A'&&name[i]<='Z') || (name[i]==' ')))
+	    {
                 break;
             }
             i++;
         }
-        if(name[i] == '\0') break;
-        else cout<<"<--Please Enter A Valid Name-->\n";
+        if(name[i] == '\0') 
+	break;
+        else 
+	cout<<"<--Please Enter A Valid Name-->\n";
     }while(1);
  
     do{
@@ -106,18 +115,23 @@ void account::create_account(){
         cin.getline(m_no,20);
 
         int i=0;
-        while(i<20 && m_no[i] != '\0'){
+        while(i<20 && m_no[i] != '\0')
+	{
             i++;
         }
-        if(i == 10){
+        if(i == 10)
+	{
             i=0;
-            while(i<20 && m_no[i] != '\0'){
-                if(!(m_no[i]>='0' && m_no[i]<='9')){
+            while(i<20 && m_no[i] != '\0')
+	    {
+                if(!(m_no[i]>='0' && m_no[i]<='9'))
+		{
                     break;
                 }
                 i++;
             }
-            if(m_no[i] == '\0') break;
+            if(m_no[i] == '\0') 
+	    break;
         }
         cout<<"<--Please Enter A Valid Mobile Number-->\n";
     }while(1);
@@ -129,8 +143,11 @@ void account::create_account(){
         char pass_cpy[20];
         cout<<"Enter Password Again : ";
         cin.getline(pass_cpy,20);
-        if(strcmp(pass, pass_cpy) == 0) break;
-        else cout<<"<--Passwords Not Matched, Try Again-->\n";
+	    
+        if(strcmp(pass, pass_cpy) == 0)
+	break;
+        else 
+	cout<<"<--Passwords Not Matched, Try Again-->\n";
     }while(1);
 
     cout<<"\nEnter Minimum Balance Limit : Rs ";
@@ -144,10 +161,12 @@ void account::create_account(){
     do{
         cout<<"\nEnter Initial Deposite Amount : Rs ";
 	    cin>>balance;
-        if(balance < min_bal){
+        if(balance < min_bal)
+	{
             cout<<"<--Minimum Balance Limit : Rs "<<min_bal<<"-->\n";
         }
-        else if(balance > max_bal){
+        else if(balance > max_bal)
+	{
             cout<<"<--Maximum Balance Limit : Rs "<<max_bal<<"-->\n";
         }
     }while(balance < min_bal || balance > max_bal);
@@ -192,13 +211,16 @@ void account::modify_account()
 
         int i=0;
         while(i<20 && name[i] != '\0'){
-            if(!((name[i]>='a'&&name[i]<='z') || (name[i]>='A'&&name[i]<='Z') || (name[i]==' '))){
+            if(!((name[i]>='a'&&name[i]<='z') || (name[i]>='A'&&name[i]<='Z') || (name[i]==' ')))
+	    {
                 break;
             }
             i++;
         }
-        if(name[i] == '\0') break;
-        else cout<<"<--Please Enter A Valid Name-->\n";
+        if(name[i] == '\0') 
+	break;
+        else 
+	cout<<"<--Please Enter A Valid Name-->\n";
     }while(1);
 
     do{
@@ -206,18 +228,23 @@ void account::modify_account()
         cin.getline(m_no,20);
 
         int i=0;
-        while(i<20 && m_no[i] != '\0'){
+        while(i<20 && m_no[i] != '\0')
+	{
             i++;
         }
-        if(i == 10){
+        if(i == 10)
+	{
             i=0;
-            while(i<20 && m_no[i] != '\0'){
-                if(!(m_no[i]>='0' && m_no[i]<='9')){
+            while(i<20 && m_no[i] != '\0')
+	    {
+                if(!(m_no[i]>='0' && m_no[i]<='9'))
+		{
                     break;
                 }
                 i++;
             }
-            if(m_no[i] == '\0') break;
+            if(m_no[i] == '\0') 
+	    break;
         }
         cout<<"<--Please Enter A Valid Mobile Number-->\n";
     }while(1);
@@ -229,25 +256,31 @@ void account::modify_account()
         char pass_cpy[20];
         cout<<"Enter Password Again : ";
         cin.getline(pass_cpy,20);
-        if(strcmp(pass, pass_cpy) == 0) break;
-        else cout<<"<--Passwords Not Matched, Try Again-->\n";
+        if(strcmp(pass, pass_cpy) == 0) 
+	break;
+        else 
+	cout<<"<--Passwords Not Matched, Try Again-->\n";
     }while(1);
 
     cout<<"\nModify Minimum Balance Limit : Rs ";
-	cin>>min_bal;
+    cin>>min_bal;
+	
     min_bal = max(min_bal, 0);
 
     cout<<"Modify Maximum Balance Limit : Rs ";
-	cin>>max_bal;
+    cin>>max_bal;
+	
     max_bal = max(max_bal, min_bal);
 
     do{
         cout<<"\nModify Balance Amount : Rs ";
 	    cin>>balance;
-        if(balance < min_bal){
+        if(balance < min_bal)
+	{
             cout<<"<--Minimum Balance Limit : Rs "<<min_bal<<"-->\n";
         }
-        else if(balance > max_bal){
+        else if(balance > max_bal)
+	{
             cout<<"<--Maximum Balance Limit : Rs "<<max_bal<<"-->\n";
         }
     }while(balance < min_bal || balance > max_bal);
@@ -301,17 +334,22 @@ int account::get_max_bal() const
 	return max_bal;
 }
 
-int get_acno(string s){
+int get_acno(string s)
+{
     int temp_ac_no = 0;
-    for(int i=0; i<6; i++){
+    for(int i=0; i<6; i++)
+    {
         temp_ac_no = temp_ac_no*10 + (int)(s[i]-'0');
     }
     return temp_ac_no;
 }
 
-bool account::authenticate(char p[]){
-    if(strcmp(pass,p) == 0) return true;
-    else return false;
+bool account::authenticate(char p[])
+{
+    if(strcmp(pass,p) == 0) 
+    return true;
+    else 
+    return false;
 }
 
 // MENU FUNCTIONS
@@ -335,11 +373,13 @@ int login(){
         cout<<"\nSELECT AN OPTION (0-2) : ";
         cin>>ch;
 
-        if(ch == 0){ 
+        if(ch == 0)
+	{ 
             system("cls");
             exit(0);
         }
-        if(ch == 1){
+        if(ch == 1)
+	{
             system("cls");
             cout<<"==================================\n";
             cout<<"         AUTHENTICATION\n";
@@ -349,14 +389,17 @@ int login(){
             char pass[20];
             cin.ignore();
             cin.getline(pass,20);
-            if(strcmp(pass,"123") != 0){
+		
+            if(strcmp(pass,"123") != 0)
+	    {
                 cout<<"<--INVALID PASSWORD-->\n";
                 exit(0);
             }
             mode = 1;
             ch = 0;
         }
-        else if(ch == 2){
+        else if(ch == 2)
+	{
             system("cls");
             cout<<"==================================\n";
             cout<<"         AUTHENTICATION\n";
@@ -367,12 +410,14 @@ int login(){
             do{
                 cout<<"Please Enter Account Number : ";
                 cin>>temp_acno;
-                if(temp_acno.size() != 6 || !check_acno(temp_acno) || (get_acno(temp_acno) < 100000)){
+                if(temp_acno.size() != 6 || !check_acno(temp_acno) || (get_acno(temp_acno) < 100000))
+		{
                     cout<<"<--Enter 6-digit Valid Account Number-->\n\n";
                 }
                 else{
                     id = ac_exists(get_acno(temp_acno));
-                    if(id != -1){ 
+                    if(id != -1)
+		    { 
                         break;
                     }
                     else{
@@ -386,7 +431,8 @@ int login(){
             char pass[20];
             cin.ignore();
             cin.getline(pass,20);
-            if(!Accounts[id].authenticate(pass)){
+            if(!Accounts[id].authenticate(pass))
+	    {
                 cout<<"<--INVALID PASSWORD-->\n";
                 exit(0);
             }
@@ -409,7 +455,8 @@ void intro()
     cin.get();
 }
 
-void show_main_menu(){
+void show_main_menu()
+{
 	system("cls");
 	cout<<"===============================\n";
 	cout<<"          MAIN MENU\n";
@@ -422,7 +469,8 @@ void show_main_menu(){
 	cout<<"\n0. EXIT";
 }
 
-void show_user_menu(){
+void show_user_menu()
+{
 	system("cls");
 	cout<<"===============================\n";
 	cout<<"          USER MENU\n";
@@ -434,7 +482,8 @@ void show_user_menu(){
 	cout<<"\n0. EXIT";
 }
 
-void show_ac_menu(){
+void show_ac_menu()
+{
 	system("cls");
 	cout<<"==============================\n";
 	cout<<"          ACCOUNTS\n";
@@ -449,7 +498,8 @@ void show_ac_menu(){
 	cout<<"\n0. RETURN TO MAIN MENU";
 }
 
-void show_cash_menu(){
+void show_cash_menu()
+{
 	system("cls");
 	cout<<"================================\n";
 	cout<<"     MONEY WITHDRAW/DEPOSIT\n";
@@ -491,7 +541,7 @@ void save_data()
     int n = Accounts.size();
 	for(int i=0; i<n; i++)
 	{
-        outFile.write(reinterpret_cast<char *> (&Accounts[i]), sizeof(account));
+        	outFile.write(reinterpret_cast<char *> (&Accounts[i]), sizeof(account));
 	}
 	outFile.close();
 	remove("account.dat");
@@ -505,36 +555,46 @@ void cash_main();           //driver function for money withdraw/deposite
 void accounts_main();       //driver function for accounts
 void transcript();          //driver function for transaction script
 
-void money_transfer(){
+void money_transfer()
+{
     int ac1, ac2, amount;
     system("cls");
     cout<<"================================\n";
-	cout<<"         MONEY TRANSFER\n";
-	cout<<"================================\n";
+    cout<<"         MONEY TRANSFER\n";
+    cout<<"================================\n";
     cout<<"\n\nFROM Account Number : "; cin>>ac1;
+	
     int id1 = ac_exists(ac1);
-    if(id1 == -1){ 
+    if(id1 == -1)
+    { 
         cout<<"\n<--Account Number Does Not Exist-->";
         return;
     }
+	
     Accounts[id1].show_account();
     cout<<"\n\nTO Account Number : "; cin>>ac2;
+	
     int id2 = ac_exists(ac2);
-    if(id2 == -1){ 
+    if(id2 == -1)
+    { 
         cout<<"\n<--Account Number Does Not Exist-->";
         return;
     }
     Accounts[id2].show_account();
     cout<<"\n\nENTER AMOUNT  : "; cin>>amount;
-    if(Accounts[id1].get_balance() < amount){
+	
+    if(Accounts[id1].get_balance() < amount)
+    {
         cout<<"\n<--Insufficient Balance-->";
         return;
     }
-    if((Accounts[id1].get_balance()-amount) < Accounts[id1].get_min_bal()){
+    if((Accounts[id1].get_balance()-amount) < Accounts[id1].get_min_bal())
+    {
         cout<<"\n<--Accounts Violating Balance Limit--> \n<--Transaction Not Possible-->";
         return;
     }
-    if((Accounts[id2].get_balance()+amount) > Accounts[id2].get_max_bal()){
+    if((Accounts[id2].get_balance()+amount) > Accounts[id2].get_max_bal())
+    {
         cout<<"\n<--Accounts Violating Balance Limit--> \n<--Transaction Not Possible-->";
         return;
     }
@@ -543,12 +603,13 @@ void money_transfer(){
     cout<<"\n\nMoney Transfered Successfully.";
 }
 
-void money_transfer_user(int id1){
+void money_transfer_user(int id1)
+{
     int ac1, ac2, amount;
     system("cls");
     cout<<"================================\n";
-	cout<<"         MONEY TRANSFER\n";
-	cout<<"================================\n";
+    cout<<"         MONEY TRANSFER\n";
+    cout<<"================================\n";
 
     ac1 = Accounts[id1].get_ac_no();
     cout<<"\n\nFROM Account Number : "<<ac1<<"\n";
@@ -556,24 +617,30 @@ void money_transfer_user(int id1){
 
     cout<<"\n\nTO Account Number : "; cin>>ac2;
     int id2 = ac_exists(ac2);
-    if(id2 == -1){ 
+	
+    if(id2 == -1)
+    { 
         cout<<"\n<--Account Number Does Not Exist-->";
         return;
     }
     Accounts[id2].show_account(false, false);
 
     cout<<"\n\nENTER AMOUNT  : "; cin>>amount;
-    if(Accounts[id1].get_balance() < amount){
+	
+    if(Accounts[id1].get_balance() < amount)
+    {
         cout<<"\n<--Insufficient Balance-->";
         return;
     }
 
-    if((Accounts[id1].get_balance()-amount) < Accounts[id1].get_min_bal()){
+    if((Accounts[id1].get_balance()-amount) < Accounts[id1].get_min_bal())
+    {
         cout<<"\n<--Accounts Violating Balance Limit--> \n<--Transaction Not Possible-->";
         return;
     }
 
-    if((Accounts[id2].get_balance()+amount) > Accounts[id2].get_max_bal()){
+    if((Accounts[id2].get_balance()+amount) > Accounts[id2].get_max_bal())
+    {
         cout<<"\n<--Accounts Violating Balance Limit--> \n<--Transaction Not Possible-->";
         return;
     }
@@ -583,38 +650,52 @@ void money_transfer_user(int id1){
 }
 
 //money transfer menu driver function
-void cash_main(){
+void cash_main()
+{
     int ch, num, amount;
     do
     {
         show_cash_menu();
         cout<<"\n\nSELECT AN OPTION (0-2) : ";
         cin>>ch;
-        if(ch<=0 || ch>2){ continue; }
+	    
+        if(ch<=0 || ch>2)
+	{ 
+	    continue; 
+	}
         system("cls");
-        if(ch == 1){
+	    
+        if(ch == 1)
+	{
             cout<<"================================\n";
             cout<<"         MONEY DEPOSIT\n";
             cout<<"================================\n";
         }
-        else if(ch == 2){
+        else if(ch == 2)
+	{
             cout<<"================================\n";
             cout<<"         MONEY WITHDRAW\n";
             cout<<"================================\n";
         }
+	    
         cout<<"\n\nENTER THE Account Number : "; cin>>num;
+	    
         int id = ac_exists(num);
-        if(id == -1){ 
+        if(id == -1)
+	{ 
             cout<<"\n<--Account Number Does Not Exist-->";
             continue; 
         }
+	    
         Accounts[id].show_account();
         cout<<"\n\nENTER AMOUNT  : "; cin>>amount;
-        if(ch==2 && Accounts[id].get_balance() < amount){
+        if(ch==2 && Accounts[id].get_balance() < amount)
+	{
             cout<<"\n<--Insufficient Balance-->";
             continue;
         }
-        if(ch==2 && (Accounts[id].get_balance()-amount) < Accounts[id].get_min_bal()){
+        if(ch==2 && (Accounts[id].get_balance()-amount) < Accounts[id].get_min_bal())
+	{
             cout<<"\n<--Accounts Violating Balance Limit--> \n<--Transaction Not Possible-->";
             return;
         }
@@ -627,36 +708,49 @@ void cash_main(){
 }
 
 //money transfer menu for user
-void cash_user(int id){
+void cash_user(int id)
+{
     int ch, amount;
     do
     {
         show_cash_menu();
         cout<<"\n\nSELECT AN OPTION (0-2) : ";
         cin>>ch;
-        if(ch<=0 || ch>2){ continue; }
+	    
+        if(ch<=0 || ch>2)
+	{ 
+	    continue; 
+	}
         system("cls");
-        if(ch == 1){
+	    
+        if(ch == 1)
+	{
             cout<<"================================\n";
             cout<<"         MONEY DEPOSIT\n";
             cout<<"================================\n";
         }
-        else if(ch == 2){
+        else if(ch == 2)
+	{
             cout<<"================================\n";
             cout<<"         MONEY WITHDRAW\n";
             cout<<"================================\n";
         }
+	    
         Accounts[id].show_account(false);
         cout<<"\n\nENTER AMOUNT  : "; cin>>amount;
-        if(ch==2 && Accounts[id].get_balance() < amount){
+	    
+        if(ch==2 && Accounts[id].get_balance() < amount)
+	{
             cout<<"\n<--Insufficient Balance-->";
             continue;
         }
-        if(ch==2 && (Accounts[id].get_balance()-amount) < Accounts[id].get_min_bal()){
+        if(ch==2 && (Accounts[id].get_balance()-amount) < Accounts[id].get_min_bal())
+	{
             cout<<"\n<--Accounts Violating Balance Limit--> \n<--Transaction Not Possible-->";
             return;
         }
-        if(ch==1 && (Accounts[id].get_balance()+amount) > Accounts[id].get_max_bal()){
+        if(ch==1 && (Accounts[id].get_balance()+amount) > Accounts[id].get_max_bal())
+	{
             cout<<"\n<--Accounts Violating Balance Limit--> \n<--Transaction Not Possible-->";
             return;
         }
@@ -665,16 +759,23 @@ void cash_user(int id){
 }
 
 //accounts menu driver function
-void accounts_main(){
+void accounts_main()
+{
     int ch, num;
     do
     {
         show_ac_menu();
         cout<<"\n\nSELECT AN OPTION (0-7) : ";
         cin>>ch;
-        if(ch<0 || ch>7){ continue; }
+	    
+        if(ch<0 || ch>7)
+	{ 
+	    continue; 
+	}
         system("cls");
-        switch(ch){
+	    
+        switch(ch)
+	{
             case 0:
                 return;
             case 1:
@@ -684,21 +785,24 @@ void accounts_main(){
                 cout<<"================================\n";
                 cout<<"        MODIFY ACCOUNT\n";
                 cout<<"================================\n";
-                cout<<"\n\nENTER THE Account Number : "; cin>>num;
+                cout<<"\n\nENTER THE Account Number : "; 
+		cin>>num;
                 modify_account(num);
                 break;
             case 3:
                 cout<<"================================\n";
                 cout<<"        DELETE ACCOUNT\n";
                 cout<<"================================\n";
-                cout<<"\n\nENTER THE Account Number : "; cin>>num;
+                cout<<"\n\nENTER THE Account Number : ";
+		cin>>num;
                 delete_account(num);
                 break;
             case 4:
                 cout<<"================================\n";
                 cout<<"        ACCOUNT DETAILS\n";
                 cout<<"================================\n";
-                cout<<"\n\nENTER THE Account Number : "; cin>>num;
+                cout<<"\n\nENTER THE Account Number : ";
+		cin>>num;
                 display_sp(num);
                 break;
             case 5:
@@ -721,17 +825,27 @@ void accounts_main(){
 vector<account> acc;
 vector<vector<int> > safe_seq;
 
-//function to remove dublicate safe sequences
-void remove_dublicates(vector<vector<int> > &safe_seq){
+//function to remove duplicate safe sequences
+void remove_dublicates(vector<vector<int> > &safe_seq)
+{
     int size = safe_seq.size();
     int num = safe_seq[0].size();
-    for(int i=0; i<size; i++){
-        for(int j=i+1; j<size; j++){
+	
+    for(int i=0; i<size; i++)
+    {
+        for(int j=i+1; j<size; j++)
+	{
             int k;
-            for(k=0; k<num; k++){
-                if(safe_seq[i][k] != safe_seq[j][k]){ break; }
+            for(k=0; k<num; k++)
+	    {
+                if(safe_seq[i][k] != safe_seq[j][k])
+		{ 
+		    break; 
+		}
             }
-            if(k == num){
+		
+            if(k == num)
+	    {
                 safe_seq.erase(safe_seq.begin()+j);
                 size--;
                 j--;
@@ -741,10 +855,13 @@ void remove_dublicates(vector<vector<int> > &safe_seq){
 }
 
 //function to update account balance
-void update_ac_bal(int ac_no, int bal){
+void update_ac_bal(int ac_no, int bal)
+{
     int n = Accounts.size();
-    for(int i=0; i<n; i++){
-        if(Accounts[i].get_ac_no() == ac_no){
+    for(int i=0; i<n; i++)
+    {
+        if(Accounts[i].get_ac_no() == ac_no)
+	{
             Accounts[i].set_balance(bal);
             Accounts[i].show();
             break;
@@ -753,28 +870,39 @@ void update_ac_bal(int ac_no, int bal){
 }
 
 //function for deadlock detection and prevention
-void bankers_algo(vector<Transaction> &tran){
+void bankers_algo(vector<Transaction> &tran)
+{
     int size = tran.size();
     vector<int> seq(size);
-    for(int i=0; i<size; i++){ seq[i] = i; }
+    for(int i=0; i<size; i++)
+    { 
+	seq[i] = i; 
+    }
 
     do
     {
         vector<account> temp_acc = acc;
         vector<Transaction> temp_tran;
-        for(int i=0; i<size; i++){
+	    
+        for(int i=0; i<size; i++)
+	{
             temp_tran.push_back(tran[seq[i]]);
         }
 
         int temp_size = temp_tran.size();
         vector<int> ss;
-        while(temp_size){
+	    
+        while(temp_size)
+	{
             bool waiting = true;
-            for(int i=0; i<temp_size; i++){
-                if((temp_acc[ID[temp_tran[i].from]].get_balance()-temp_tran[i].amount) < temp_acc[ID[temp_tran[i].from]].get_min_bal()){
+            for(int i=0; i<temp_size; i++)
+	    {
+                if((temp_acc[ID[temp_tran[i].from]].get_balance()-temp_tran[i].amount) < temp_acc[ID[temp_tran[i].from]].get_min_bal())
+		{
                     continue;
                 }
-                if((temp_acc[ID[temp_tran[i].to]].get_balance()+temp_tran[i].amount) > temp_acc[ID[temp_tran[i].to]].get_max_bal()){
+                if((temp_acc[ID[temp_tran[i].to]].get_balance()+temp_tran[i].amount) > temp_acc[ID[temp_tran[i].to]].get_max_bal())
+		{
                     continue;
                 }
                 
@@ -786,22 +914,30 @@ void bankers_algo(vector<Transaction> &tran){
                 temp_size--;
                 i--;
             }
-            if(waiting){ break; }
+		
+            if(waiting)
+	    { 
+		break; 
+	    }
         }
-        if(temp_size == 0){
+	    
+        if(temp_size == 0)
+	{
             safe_seq.push_back(ss);
         }
     }while(next_permutation(seq.begin(), seq.end()));
 }
 
 //function to check if transactions are possible or not
-bool tran_is_possible(vector<Transaction> &tran){
+bool tran_is_possible(vector<Transaction> &tran)
+{
     vector<account> temp_acc = acc;
     vector<Transaction> temp_tran = tran;
 
     int size = temp_tran.size();
 
-    for(int i=0; i<size; i++){
+    for(int i=0; i<size; i++)
+    {
         temp_acc[ID[temp_tran[i].from]].withdraw(temp_tran[i].amount);
         temp_acc[ID[temp_tran[i].to]].deposite(temp_tran[i].amount);
     }
@@ -809,9 +945,13 @@ bool tran_is_possible(vector<Transaction> &tran){
     bool is_possible = true;
     int x = 1;
     size = acc.size();
-    for(int i=0; i<size; i++){
-        if(temp_acc[i].get_balance() < temp_acc[i].get_min_bal()){
-            if(is_possible){
+	
+    for(int i=0; i<size; i++)
+    {
+        if(temp_acc[i].get_balance() < temp_acc[i].get_min_bal())
+	{
+            if(is_possible)
+	    {
                 cout<<"\n\nTRANSACTIONS NOT POSSIBLE BECAUSE OF FOLLOWING ISSUE(S) :";
                 cout<<"\n---------------------------------------------------------\n";
                 is_possible = false;
@@ -824,17 +964,22 @@ bool tran_is_possible(vector<Transaction> &tran){
 
             cout<<"\tISSUE : Insufficient Balance OR Minimum Balance Limit Violated.\n";
             cout<<"\tSOLUTION : Add Rs "<<diff<<" to account.\n";
-            if(acc[i].get_balance() + diff > acc[i].get_max_bal()){
+		
+            if(acc[i].get_balance() + diff > acc[i].get_max_bal())
+	    {
                 cout<<"\t           Set Maximum Balance Limit to at least Rs "<<(acc[i].get_balance() + diff)<<".\n";
             }
             cout<<endl;
         }
-        else if(temp_acc[i].get_balance() > temp_acc[i].get_max_bal()){
-            if(is_possible){
+        else if(temp_acc[i].get_balance() > temp_acc[i].get_max_bal())
+	{
+            if(is_possible)
+	    {
                 cout<<"\n\nTRANSACTIONS NOT POSSIBLE BECAUSE OF FOLLOWING ISSUE(S) :";
                 cout<<"\n---------------------------------------------------------\n";
                 is_possible = false;
             }
+		
             cout<<x++<<".)\tACC NO : "<<temp_acc[i].get_ac_no()<<" (";
             temp_acc[i].show_name();
             cout<<")\n";
@@ -849,7 +994,8 @@ bool tran_is_possible(vector<Transaction> &tran){
 }
 
 //transcript menu driver function
-void transcript(){
+void transcript()
+{
     system("cls");
     ID.clear();
     acc.clear();
@@ -860,60 +1006,86 @@ void transcript(){
     int num;
     cout<<"\nENTER NUMBER OF TRANSACTIONS TO RUN : ";
     cin>>num;
-    if(num < 1) return;
+	
+    if(num < 1) 
+    return;
     
     vector<Transaction> tran(num);
-    for(int i=0; i<num; i++){
+	
+    for(int i=0; i<num; i++)
+    {
         int ac1, ac2, amount;
         cout<<"\nTRANSACTION "<<i+1<<" :\n";
         cout<<"----------------\n";
         tran[i].tid = i+1;
         cout<<"FROM AC NO. : "; cin>>ac1;
         int id1 = ac_exists(ac1);
-        if(id1 == -1){
+	    
+        if(id1 == -1)
+	{
             cout<<"\n<--Account Number Does Not Exist-->";
             return;
         }
-        if(ID.count(ac1) == 0){
+	    
+        if(ID.count(ac1) == 0)
+	{
             ID[ac1] = acc.size();
             acc.push_back(Accounts[id1]);
         }
-        cout<<"TO AC NO.   : "; cin>>ac2;
+	    
+        cout<<"TO AC NO.   : ";
+	cin>>ac2;
+	    
         int id2 = ac_exists(ac2);
-        if(id2 == -1){ 
+        if(id2 == -1)
+	{ 
             cout<<"\n<--Account Number Does Not Exist-->";
             return;
         }
-        if(ID.count(ac2) == 0){
+	    
+        if(ID.count(ac2) == 0)
+	{
             ID[ac2] = acc.size();
             acc.push_back(Accounts[id2]);
         }
-        cout<<"AMOUNT      : Rs "; cin>>amount;
+	    
+        cout<<"AMOUNT      : Rs "; 
+	cin>>amount;
         tran[i].from = ac1;
         tran[i].to = ac2;
         tran[i].amount = amount;
     }
 
-    if(!tran_is_possible(tran)){ return; }
+    if(!tran_is_possible(tran))
+    { 
+	return; 
+    }
 
     bankers_algo(tran);
 
-    if(safe_seq.size() == 0){
+    if(safe_seq.size() == 0)
+    {
         cout<<"\n\nTRANSACTIONS NOT POSSIBLE BECAUSE OF DEADLOCK.";
     }
-    else{
+    else
+    {
         remove_dublicates(safe_seq);
         cout<<"\n\nSAFE SEQUENCE(S) : \n";
         cout<<"------------------ \n";
         int size = safe_seq.size();
-        for(int i=0; i<size; i++){
+	    
+        for(int i=0; i<size; i++)
+	{
             cout<<i+1<<".) ";
-            for(int j=0; j<num; j++){
+            for(int j=0; j<num; j++)
+	    {
                 cout<<"T"<<safe_seq[i][j]<<" ";
             }
             cout<<endl;
         }
-        for(int j=0; j<num; j++){
+	    
+        for(int j=0; j<num; j++)
+	{
             int id = safe_seq[0][j];
             acc[ID[tran[id-1].from]].withdraw(tran[id-1].amount);
             acc[ID[tran[id-1].to]].deposite(tran[id-1].amount);
@@ -924,7 +1096,9 @@ void transcript(){
         cout<<"A/C NO\t\tNAME                \tBALANCE\n";
         cout<<"====================================================\n";
         size = acc.size();
-        for(int i=0; i<size; i++){
+	    
+        for(int i=0; i<size; i++)
+	{
             update_ac_bal(acc[i].get_ac_no(), acc[i].get_balance());
         }
         
@@ -933,16 +1107,21 @@ void transcript(){
 }
 
 //Admin Mode Driver Function
-void admin_main(){
+void admin_main()
+{
 	int ch, num;
     do
 	{
 		show_main_menu();
 		cout<<"\n\nSELECT AN OPTION (0-5) : ";
 		cin>>ch;
-		if(ch<0 || ch>5){ continue; }
+		if(ch<0 || ch>5)
+		{ 
+		    continue; 
+		}
 
 		system("cls");
+		
 		switch(ch)
 		{
             case 0:
@@ -954,7 +1133,8 @@ void admin_main(){
                 cout<<"================================\n";
                 cout<<"        ACCOUNT DETAILS\n";
                 cout<<"================================\n";
-                cout<<"\n\nENTER THE Account Number : "; cin>>num;
+                cout<<"\n\nENTER THE Account Number : "; 
+		cin>>num;
                 display_sp(num);
                 break;
             case 3:
@@ -974,14 +1154,18 @@ void admin_main(){
 }
 
 //User  Mode Driver Function
-void user_main(){
+void user_main()
+{
     int ch;
     do
 	{
 		show_user_menu();
 		cout<<"\n\nSELECT AN OPTION (0-4) : ";
 		cin>>ch;
-		if(ch<0 || ch>4){ continue; }
+		if(ch<0 || ch>4)
+		{ 
+		    continue; 
+		}
 
 		system("cls");
 		switch(ch)
@@ -1018,75 +1202,85 @@ int main()
 {
     cout.setf(ios::left, ios::adjustfield);
     get_data();
-	system("cls");
-	intro();
+    system("cls");
+    intro();
 
     const int mode = login();
-    if(mode == 1) admin_main();
-    else if(mode == 2) user_main();
 	
-	system("cls");
+    if(mode == 1) 
+    admin_main();
+	    
+    else if(mode == 2) 
+    user_main();
+	
+    system("cls");
     save_data();
-	return 0;
+    return 0;
 }
 
 
-//FUNCTION DEFINATIONS
+//FUNCTION DEFINITIONS
 void write_account()
 {
-    cout<<"================================\n";
+        cout<<"================================\n";
 	cout<<"           NEW ACCOUNT\n";
 	cout<<"================================\n";
 	account ac;
 	ac.create_account();
 	Accounts.push_back(ac);
-    cout<<"\n\nAccount Created Successfully.";
+        cout<<"\n\nAccount Created Successfully.";
 }
 
 void display_sp(int num)
 {
     int i, n = Accounts.size();
-    for(i=0; i<n; i++){
+	
+    for(i=0; i<n; i++)
+    {
         if(Accounts[i].get_ac_no()==num)
-		{
-			Accounts[i].show_account();
-			break;
-		}
+	{
+		Accounts[i].show_account();
+		break;
+	}
     }
 	if(i == n)
-		cout<<"\n\n<--Account Number Does Not Exist-->";
+	cout<<"\n\n<--Account Number Does Not Exist-->";
 }
 
 void modify_account(int num)
 {
     int i, n = Accounts.size();
-    for(i=0; i<n; i++){
-        if(Accounts[i].get_ac_no()==num)
-		{
-			Accounts[i].show_account();
+	
+    for(i=0; i<n; i++)
+    {
+	if(Accounts[i].get_ac_no()==num)
+	{
+	    Accounts[i].show_account();
             cout<<"\n\nENTER NEW DETAILS :"<<endl;
-			Accounts[i].modify_account();
+	    Accounts[i].modify_account();
             cout<<"\n\nAccount Updated.";
-			break;
-		}
+	    break;
+	}
     }
 	if(i == n)
-		cout<<"\n\n<--Account Number Does Not Exist-->";
+	cout<<"\n\n<--Account Number Does Not Exist-->";
 }
 
 void delete_account(int num)
 {
     int i, n = Accounts.size();
-    for(i=0; i<n; i++){
+	
+    for(i=0; i<n; i++)
+    {
         if(Accounts[i].get_ac_no()==num)
-		{
-			Accounts.erase(Accounts.begin()+i);
+	{
+	    Accounts.erase(Accounts.begin()+i);
             cout<<"\n\n\tRecord Deleted ..";
-			break;
-		}
+	    break;
+	}
     }
     if(i == n)
-		cout<<"\n\n<--Account Number Does Not Exist-->";
+    cout<<"\n\n<--Account Number Does Not Exist-->";
 }
 
 
@@ -1096,41 +1290,48 @@ void display_all()
 	cout<<"====================================================\n";
 	cout<<"A/C NO\t\tNAME                \tBALANCE\n";
 	cout<<"====================================================\n";
-    int i, n = Accounts.size();
-    for(i=0; i<n; i++){
-		Accounts[i].show();
-    }
+        int i, n = Accounts.size();
+        for(i=0; i<n; i++)
+	{
+	    Accounts[i].show();
+        }
 }
 
 void deposit_withdraw(int num, int amount, int option, bool out)
 {
     int i, n = Accounts.size();
-    for(i=0; i<n; i++){
+	
+    for(i=0; i<n; i++)
+    {
         if(Accounts[i].get_ac_no()==num)
+	{
+		if(option==1)
 		{
-			if(option==1)
-			{
-				Accounts[i].deposite(amount);
-                if(out)
-                cout<<"\n\nMoney Deposited Successfully.";
-			}
-		    else if(option==2)
-			{
-                if(Accounts[i].get_balance() >= amount){
-                    Accounts[i].withdraw(amount);
-                    if(out)
-                    cout<<"\n\nMoney Withdrawn Successfully.";
-                }
-		    }
-			break;
+			Accounts[i].deposite(amount);
+                        if(out)
+                	cout<<"\n\nMoney Deposited Successfully.";
 		}
+		else if(option==2)
+		{
+                	if(Accounts[i].get_balance() >= amount){
+                    	Accounts[i].withdraw(amount);
+                    	if(out)
+                    	cout<<"\n\nMoney Withdrawn Successfully.";
+                }
+	}
+	break;
+	}
     }
 }
 
-int ac_exists(int num){
+int ac_exists(int num)
+{
     int i, n = Accounts.size();
-    for(int i=0; i<n; i++){
-        if(Accounts[i].get_ac_no() == num){
+	
+    for(int i=0; i<n; i++)
+    {
+        if(Accounts[i].get_ac_no() == num)
+	{
             return i;
         }
     }
